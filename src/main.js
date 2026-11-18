@@ -1,5 +1,5 @@
 import Input from "./core/input";
-import { Key } from "./core/keys";
+import { Key, Mouse } from "./core/keys";
 
 Input.init();
 
@@ -13,6 +13,13 @@ function gameLoop()
         console.log("AltLeft Pressed");
     if (Input.isKeyReleased(Key.AltLeft))
         console.log("AltLeft Released");
+
+    if (Input.isBtnPressed(Mouse.Right))
+        console.log("Left Mouse Button Pressed");
+    if (Input.isBtnDown(Mouse.Right))
+        console.log("Left Mouse Button Held");
+    if (Input.isBtnReleased(Mouse.Right))
+        console.log("Left Mouse Button Released");
 
     Input.postUpdate();
 
