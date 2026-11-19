@@ -11,7 +11,9 @@ class Context
 
     static get()
     {
-        return this.#ctx;
+        if (Context.#ctx === null)
+            throw new Error("Context.get() called before the context was created. Call Context.init(canvas) first.");
+        return Context.#ctx;
     }
 }
 
