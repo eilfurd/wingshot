@@ -38,16 +38,23 @@ class Input
         window.addEventListener("pointerdown", Input.#onBtnDown);
         window.addEventListener("pointerup", Input.#onBtnUp);
         window.addEventListener("pointermove", Input.#onMouseMove);
-        window.addEventListener("contextmenu", (event) => event.preventDefault());
+        window.addEventListener("contextmenu", Input.#onContextMenu);
     }
 
     static destroy()
     {
         window.removeEventListener("keydown", Input.#onKeyDown);
         window.removeEventListener("keyup", Input.#onKeyUp);
-        
+
         window.removeEventListener("pointerdown", Input.#onBtnDown);
         window.removeEventListener("pointerup", Input.#onBtnUp);
+        window.removeEventListener("pointermove", Input.#onMouseMove);
+        window.removeEventListener("contextmenu", Input.#onContextMenu);
+
+        Input.#observer?.disconnect();
+        Input.#observer = null;
+
+        Input.#canvas = null;
     }
     
     static postUpdate()
@@ -108,6 +115,11 @@ class Input
         Input.#dy += y - Input.#y;
         Input.#x = x;
         Input.#y = y;
+    }
+
+    static #onContextMenu(event)
+    {
+        event.preventDefault();
     }
 
     static #updateSizing()
