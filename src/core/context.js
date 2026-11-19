@@ -1,17 +1,17 @@
 class Context
 {
-    static #context = null;
+    static #ctx = null;
 
-    static Get(canvas)
+    static init(canvas)
     {
-        if (!this.#context)
-        {
-            this.#context = canvas.getContext("webgl2.0");
-            if (!this.#context)
-                throw Error("WebGL2.0 is not supported in this browser.");
-            return this.#context;    
-        }
-        return this.#context;
+        Context.#ctx = canvas.getContext("webgl2.0");
+        if (!Context.#ctx)
+            throw Error("WebGL2.0 is not supported in this browser.");
+    }
+
+    static get()
+    {
+        return this.#ctx;
     }
 }
 
